@@ -390,7 +390,7 @@
 
         /* --- RSVP Formulario --- */
         .rsvp-container {
-            max-width: 550px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
@@ -422,8 +422,7 @@
         }
 
         .rsvp-form input[type="text"],
-        .rsvp-form input[type="tel"],
-        .rsvp-form textarea {
+        .rsvp-form input[type="tel"] {
             font-family: 'Cormorant Garamond', serif;
             width: 100%;
             padding: 12px 16px;
@@ -432,49 +431,92 @@
             font-size: 1.05rem;
             transition: border-color 0.2s;
             background: #ffffff;
-            resize: vertical;
         }
 
-        .rsvp-form input:focus,
-        .rsvp-form textarea:focus {
+        .rsvp-form input:focus {
             outline: none;
             border-color: #6e6292;
         }
 
-        .rsvp-form textarea {
-            min-height: 60px;
+        /* --- Lista de invitados --- */
+        .invitados-lista {
+            margin: 20px 0 30px;
         }
 
-        .radio-group {
+        .invitado-item {
             display: flex;
-            gap: 30px;
-            margin-top: 4px;
+            align-items: center;
+            gap: 16px;
+            padding: 8px 0;
+            border-bottom: 1px solid #ede5f5;
             flex-wrap: wrap;
         }
 
-        .radio-group label {
+        .invitado-item:last-child {
+            border-bottom: none;
+        }
+
+        .invitado-item .nombre {
             font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #4d3e5a;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .invitado-item .checkbox-wrapper {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-weight: 400;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
             color: #4d3e5a;
+        }
+
+        .invitado-item .checkbox-wrapper input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #6e6292;
             cursor: pointer;
-            margin-bottom: 0;
+        }
+
+        .telefono-group {
+            margin-top: 10px;
+        }
+
+        .telefono-group label {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            color: #4d3e5a;
+            display: block;
+            margin-bottom: 6px;
             font-size: 1.05rem;
         }
 
-        .radio-group input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #6e6292;
-            cursor: pointer;
+        .telefono-group input {
+            font-family: 'Cormorant Garamond', serif;
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #ede5f5;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            transition: border-color 0.2s;
+            background: #ffffff;
+            max-width: 300px;
+        }
+
+        .telefono-group input:focus {
+            outline: none;
+            border-color: #6e6292;
         }
 
         .btn-enviar {
             font-family: 'Cormorant Garamond', serif;
             display: block;
             width: 100%;
+            max-width: 300px;
+            margin: 20px auto 0;
             padding: 14px;
             border-radius: 50px;
             font-size: 1.2rem;
@@ -485,7 +527,6 @@
             color: #6e6292;
             background: #c0b4d8;
             transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 8px;
         }
 
         .btn-enviar:hover {
@@ -514,6 +555,22 @@
 
         .mensaje-exito.active {
             display: block;
+        }
+
+        .sin-invitados {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: #7a6a85;
+            padding: 30px 0;
+        }
+
+        .loading-rsvp {
+            text-align: center;
+            padding: 40px 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: #4e4866;
         }
 
         /* --- Otros detalles --- */
@@ -709,8 +766,8 @@
             .contador-item .numero { font-size: 1.6rem; }
             .contador-item .etiqueta { font-size: 0.55rem; }
             .rsvp-form { padding: 25px 20px; }
-            .radio-group { flex-direction: column; gap: 10px; }
             .hero .logo-png { max-width: 240px; }
+            .invitado-item { flex-direction: column; align-items: flex-start; gap: 6px; }
         }
 
         @media (max-width: 480px) {
@@ -726,6 +783,7 @@
             .gracias-texto .firma { font-size: 1.2rem; text-align: center; margin: 0 auto; }
             .gracias-texto .firma span { font-size: 1.6rem; }
             .section-title .script-inline { font-size: 2rem; }
+            .telefono-group input { max-width: 100%; }
         }
 
         @media (max-width: 360px) {
@@ -815,53 +873,10 @@
             <h2 class="section-title">
                 <span class="script" style="color:#4e4866;">Confirma tu asistencia</span>
             </h2>
-            <p class="section-sub" style="color:#4e4866;">Por favor confirma tu presencia a nuestra boda antes del 31 de Agosto</p>
+            <p class="section-sub" style="color:#4e4866;">Por favor confirma tu presencia a nuestra boda antes del 30 de Septiembre</p>
 
-            <div class="rsvp-container">
-                <div class="rsvp-form" id="rsvpForm">
-                    <form id="formRSVP" onsubmit="enviarRSVP(event)">
-                        <div class="form-group">
-                            <label>¿Asistirás a la boda?</label>
-                            <div class="radio-group">
-                                <label>
-                                    <input type="radio" name="asistencia" value="asistire" checked required />
-                                    Sí, asistiré
-                                </label>
-                                <label>
-                                    <input type="radio" name="asistencia" value="noasistire" required />
-                                    No asistiré
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nombre">Nombre(s)</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Ej: María José" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="apellidos">Apellidos</label>
-                            <input type="text" id="apellidos" name="apellidos" placeholder="Ej: Pérez García" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="telefono">Teléfono <span class="opcional">(Opcional)</span></label>
-                            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 55 1234 5678" />
-                        </div>
-
-                        <!-- CAMPO CANCIÓN - NOMBRE CAMBIADO A "musica" -->
-                        <div class="form-group">
-                            <label for="musica">Queremos que disfrutes la fiesta tanto como nosotros. ¿Hay alguna canción que no pueda faltar en la pista de baile?</label>
-                            <textarea id="musica" name="musica" placeholder="¡Dejanos tu sugerencia! (Opcional)"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-enviar">Enviar confirmación</button>
-                    </form>
-
-                    <div class="mensaje-exito" id="mensajeExito">
-                        ✅ ¡Gracias! Tu confirmación ha sido enviada.
-                    </div>
-                </div>
+            <div class="rsvp-container" id="rsvpContainer">
+                <div class="loading-rsvp">⏳ Cargando invitados...</div>
             </div>
         </div>
     </section>
@@ -938,7 +953,15 @@
     </footer>
 
     <script>
-        // --- CONTADOR REGRESIVO ---
+        // ============================================================
+        // CONFIGURACIÓN - ¡ACTUALIZA ESTA URL!
+        // ============================================================
+        // Esta es la URL que obtendrás al publicar tu App Script
+        const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwVNpIIGXtPlyjh0yt9BLdcZN9j-nbB6OG6qWrvBZYC5sHve-6M_IkUT4Tag5PR3GnkDg/exec';
+
+        // ============================================================
+        // 1. CONTADOR REGRESIVO
+        // ============================================================
         function actualizarContador() {
             const fechaBoda = new Date('November 14, 2026 17:00:00').getTime();
             const ahora = new Date().getTime();
@@ -963,21 +986,15 @@
         actualizarContador();
         setInterval(actualizarContador, 1000);
 
-        // --- CARRUSEL DE GALERÍA ---
+        // ============================================================
+        // 2. CARRUSEL DE GALERÍA (fotos desde GitHub)
+        // ============================================================
         function crearCarrusel() {
             const track = document.getElementById('carruselTrack');
-            const imagenes = [
-                'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=400&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=600&fit=crop'
-            ];
+            const imagenes = [];
+            for (let i = 1; i <= 10; i++) {
+                imagenes.push(`https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/Foto${i}.png`);
+            }
             const todas = [...imagenes, ...imagenes];
             todas.forEach(url => {
                 const img = document.createElement('img');
@@ -989,44 +1006,169 @@
         }
         crearCarrusel();
 
-        // --- ENVIAR RSVP ---
-        function enviarRSVP(event) {
-            event.preventDefault();
+        // ============================================================
+        // 3. OBTENER CÓDIGO DE LA URL
+        // ============================================================
+        function obtenerCodigoURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('codigo') || '';
+        }
 
-            const form = document.getElementById('formRSVP');
-            const formData = new FormData(form);
+        // ============================================================
+        // 4. CARGAR INVITADOS DESDE APP SCRIPT (GET)
+        // ============================================================
+        async function cargarInvitados() {
+            const codigo = obtenerCodigoURL();
+            const container = document.getElementById('rsvpContainer');
 
-            const asistencia = formData.get('asistencia');
-            const nombre = formData.get('nombre');
-            const apellidos = formData.get('apellidos');
-            const telefono = formData.get('telefono');
-            // CAMBIADO: obtener 'musica' en lugar de 'cancion'
-            const musica = formData.get('musica'); 
-
-            if (!asistencia) {
-                alert('Por favor selecciona si asistirás o no.');
+            if (!codigo) {
+                container.innerHTML = `
+                    <div class="sin-invitados">
+                        <p>No se encontró un código de familia.</p>
+                        <p style="font-size:0.9rem;color:#958db2;margin-top:8px;">Si tienes dudas, contáctanos por WhatsApp.</p>
+                    </div>
+                `;
                 return;
             }
 
-            const datos = {
-                asistencia: asistencia,
-                nombre: nombre,
-                apellidos: apellidos,
-                telefono: telefono || '',
-                musica: musica || '' // CAMBIADO: enviar como 'musica'
+            try {
+                const url = `${APP_SCRIPT_URL}?codigo=${encodeURIComponent(codigo)}`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.error) {
+                    container.innerHTML = `
+                        <div class="sin-invitados">
+                            <p>${data.error}</p>
+                            <p style="font-size:0.9rem;color:#958db2;margin-top:8px;">Verifica que el código sea correcto.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                if (data.success && data.invitados && data.invitados.length > 0) {
+                    renderizarRSVP(data, container);
+                } else {
+                    container.innerHTML = `
+                        <div class="sin-invitados">
+                            <p>No se encontraron invitados para este código.</p>
+                            <p style="font-size:0.9rem;color:#958db2;margin-top:8px;">Si crees que es un error, contáctanos.</p>
+                        </div>
+                    `;
+                }
+
+            } catch (error) {
+                console.error('Error al cargar invitados:', error);
+                container.innerHTML = `
+                    <div class="sin-invitados">
+                        <p>Error al conectar con el servidor.</p>
+                        <p style="font-size:0.9rem;color:#958db2;margin-top:8px;">Por favor, intenta de nuevo más tarde.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // ============================================================
+        // 5. RENDERIZAR RSVP CON LOS DATOS RECIBIDOS
+        // ============================================================
+        function renderizarRSVP(data, container) {
+            const { codigo, invitados, telefonoExistente } = data;
+
+            // Estado local
+            let asistencias = {};
+            invitados.forEach((inv, idx) => {
+                asistencias[idx] = inv.asistencia || false;
+            });
+
+            window.estadoInvitados = {
+                codigo: codigo,
+                invitados: invitados,
+                asistencias: asistencias,
+                telefono: telefonoExistente || ''
             };
 
-            // URL del script - ACTUALIZAR CON LA NUEVA URL DESPUÉS DE PUBLICAR
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbxgGVjjeW6_b31vAfy-kngryLAb6YCFZBEUNF1cCHxnO-85vhvGTit3o6Eav9RaPSS_/exec';
+            let html = `
+                <div class="rsvp-form">
+                    <div class="invitados-lista">
+                        <label style="font-weight:600;margin-bottom:12px;">Familiares:</label>
+            `;
 
-            const botonEnviar = document.querySelector('.btn-enviar');
-            const textoOriginal = botonEnviar.textContent;
-            botonEnviar.textContent = 'Enviando...';
-            botonEnviar.disabled = true;
+            invitados.forEach((inv, idx) => {
+                const nombreCompleto = `${inv.nombre} ${inv.apellido}`.trim();
+                const checked = inv.asistencia ? 'checked' : '';
+                html += `
+                    <div class="invitado-item">
+                        <span class="nombre">${nombreCompleto}</span>
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="asistencia_${idx}" data-index="${idx}" ${checked} />
+                            <label for="asistencia_${idx}">Asistirá</label>
+                        </div>
+                    </div>
+                `;
+            });
 
-            console.log('📤 Enviando datos a Google Sheets:', datos);
+            html += `
+                    </div>
+                    <div class="telefono-group">
+                        <label for="telefonoFamiliar">Teléfono de contacto <span class="opcional">(Opcional)</span></label>
+                        <input type="tel" id="telefonoFamiliar" placeholder="Ej: 55 1234 5678" value="${telefonoExistente || ''}" />
+                        <p style="font-size:0.85rem;color:#7a6a85;margin-top:4px;">Este número se asignará a todos los familiares de la lista.</p>
+                    </div>
+                    <button type="button" class="btn-enviar" id="btnEnviarConfirmacion">Enviar confirmación</button>
+                    <div class="mensaje-exito" id="mensajeExito">✅ ¡Gracias! Tu confirmación ha sido enviada.</div>
+                </div>
+            `;
 
-            fetch(scriptURL, {
+            container.innerHTML = html;
+
+            // --- Event listeners ---
+            // Checkboxes
+            document.querySelectorAll('.invitado-item input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', function() {
+                    const idx = parseInt(this.dataset.index);
+                    window.estadoInvitados.asistencias[idx] = this.checked;
+                });
+            });
+
+            // Teléfono
+            const telefonoInput = document.getElementById('telefonoFamiliar');
+            telefonoInput.addEventListener('input', function() {
+                window.estadoInvitados.telefono = this.value.trim();
+            });
+
+            // Botón enviar
+            document.getElementById('btnEnviarConfirmacion').addEventListener('click', function() {
+                enviarConfirmacion();
+            });
+        }
+
+        // ============================================================
+        // 6. ENVIAR CONFIRMACIÓN (POST)
+        // ============================================================
+        function enviarConfirmacion() {
+            const estado = window.estadoInvitados;
+            if (!estado) return;
+
+            // Construir datos para enviar
+            const datos = {
+                codigo: estado.codigo,
+                telefono: estado.telefono || '',
+                asistencias: {}
+            };
+
+            estado.invitados.forEach((inv, idx) => {
+                const nombreCompleto = `${inv.nombre} ${inv.apellido}`.trim();
+                datos.asistencias[nombreCompleto] = estado.asistencias[idx] || false;
+            });
+
+            const boton = document.getElementById('btnEnviarConfirmacion');
+            const textoOriginal = boton.textContent;
+            boton.textContent = 'Enviando...';
+            boton.disabled = true;
+
+            console.log('📤 Enviando confirmación:', datos);
+
+            fetch(APP_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
@@ -1035,14 +1177,11 @@
                 body: JSON.stringify(datos)
             })
             .then(() => {
-                console.log('✅ Datos enviados (modo no-cors)');
-                document.getElementById('mensajeExito').classList.add('active');
-                form.reset();
-                document.querySelector('input[name="asistencia"][value="asistire"]').checked = true;
-                document.getElementById('musica').value = ''; // CAMBIADO
-
+                console.log('✅ Confirmación enviada (modo no-cors)');
+                const mensaje = document.getElementById('mensajeExito');
+                mensaje.classList.add('active');
                 setTimeout(() => {
-                    document.getElementById('mensajeExito').classList.remove('active');
+                    mensaje.classList.remove('active');
                 }, 5000);
             })
             .catch(error => {
@@ -1050,13 +1189,19 @@
                 alert('Hubo un error al enviar la confirmación. Por favor, intenta de nuevo.');
             })
             .finally(() => {
-                botonEnviar.textContent = textoOriginal;
-                botonEnviar.disabled = false;
+                boton.textContent = textoOriginal;
+                boton.disabled = false;
             });
         }
 
+        // ============================================================
+        // 7. INICIALIZAR
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', cargarInvitados);
+
         console.log('🎉 Boda de Yaneth & Miguel');
         console.log('📅 14 de noviembre de 2026');
+        console.log('🔗 App Script URL:', APP_SCRIPT_URL);
     </script>
 </body>
 </html>
