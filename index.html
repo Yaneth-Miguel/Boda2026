@@ -49,7 +49,7 @@
         /* --- Sección 1: Hero --- */
         .hero {
             min-height: 100vh;
-            background-image: url('https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/IMG001.png');
+            background-image: url('https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/IMG001.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: scroll;
@@ -250,6 +250,14 @@
             font-weight: 300;
         }
 
+        /* --- Íconos de sección --- */
+        .icono-seccion {
+            display: block;
+            height: 80px;
+            width: auto;
+            margin: 15px auto 20px;
+        }
+
         /* --- Recepción --- */
         .recepcion-info {
             text-align: center;
@@ -307,7 +315,7 @@
 
         /* --- Gracias con fondo --- */
         .section-gracias {
-            background-image: url('https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/IMG002.png');
+            background-image: url('https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/IMG001.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: scroll;
@@ -633,7 +641,7 @@
 
         /* --- Regalos con fondo --- */
         .section-regalos {
-            background-image: url('https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/IMG003.png');
+            background-image: url('https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/IMG001.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: scroll;
@@ -724,7 +732,7 @@
 
         @keyframes scrollCarrusel {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-25%); }
+            100% { transform: translateX(-50%); }
         }
 
         /* --- Footer --- */
@@ -836,6 +844,7 @@
             <h2 class="section-title" style="color:#6e6292;">
                 <span class="script" style="color:#6e6292;">Recepción</span>
             </h2>
+            <img src="https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/Recepcion.png" alt="Recepción" class="icono-seccion" />
             <div class="recepcion-info">
                 <div class="hora">
                     <span class="linea"></span>
@@ -890,10 +899,12 @@
             <div class="detalles-grid">
                 <div class="detalle-card">
                     <h3>Niños</h3>
+                    <img src="https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/Ninos.png" alt="Niños" class="icono-seccion" />
                     <p>Adoramos a tus hijos, pero creemos que necesitas una noche libre. Nuestra boda será una celebración exclusivamente para adultos.</p>
                 </div>
                 <div class="detalle-card">
                     <h3>Código de vestimenta</h3>
+                    <img src="https://raw.githubusercontent.com/Yaneth-Miguel/Boda2026/refs/heads/main/Codigo-vestimenta.png" alt="Código de vestimenta" class="icono-seccion" />
                     <p style="font-weight:600;color:#4d3e5a;font-size:1.1rem;font-family:'Cormorant Garamond',serif;">SEMI FORMAL</p>
                     <p style="font-size:1rem;margin-top:4px;font-family:'Cormorant Garamond',serif;color:#958db2;">Les pedimos a las mujeres evitar prendas en tonos:</p>
                     <div class="circulos-colores">
@@ -932,7 +943,7 @@
     <section class="section section-galeria" id="galeria">
         <div class="container">
             <h2 class="section-title"><span class="script">Galería</span></h2>
-            <p class="section-sub">Dicen que los momentos más sencillos suelen convertirse en los recuerdos más bonitos. Rodeados de naturaleza y disfrutando de una tarde tranquila juntos, estas fotografías guardan un pedacito de esta etapa tan especial para nosotros.</p>
+            <p class="section-sub">Dicen que una fotografía detiene el tiempo por un instante. Estas imágenes son algunos de los recuerdos que hoy nos han traído hasta aquí.</p>
             <div class="carrusel-container">
                 <div class="carrusel-track" id="carruselTrack"></div>
             </div>
@@ -956,8 +967,7 @@
         // ============================================================
         // CONFIGURACIÓN - ¡ACTUALIZA ESTA URL!
         // ============================================================
-        // Esta es la URL que obtendrás al publicar tu App Script
-        const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwVNpIIGXtPlyjh0yt9BLdcZN9j-nbB6OG6qWrvBZYC5sHve-6M_IkUT4Tag5PR3GnkDg/exec';
+        const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxgGVjjeW6_b31vAfy-kngryLAb6YCFZBEUNF1cCHxnO-85vhvGTit3o6Eav9RaPSS_/exec';
 
         // ============================================================
         // 1. CONTADOR REGRESIVO
@@ -1040,7 +1050,7 @@
                     container.innerHTML = `
                         <div class="sin-invitados">
                             <p>${data.error}</p>
-                            <p style="font-size:0.9rem;color:#958db2;margin-top:8px;">Verifica que el código sea correcto.</p>
+                            <p style="font-size:0.9rem;margin-top:8px;">Verifica que el código sea correcto.</p>
                         </div>
                     `;
                     return;
@@ -1052,7 +1062,7 @@
                     container.innerHTML = `
                         <div class="sin-invitados">
                             <p>No se encontraron invitados para este código.</p>
-                            <p style="font-size:0.9rem;color:#958db2;margin-top:8px;">Si crees que es un error, contáctanos.</p>
+                            <p style="font-size:0.9rem;margin-top:8px;">Si crees que es un error, contáctanos.</p>
                         </div>
                     `;
                 }
@@ -1062,7 +1072,7 @@
                 container.innerHTML = `
                     <div class="sin-invitados">
                         <p>Error al conectar con el servidor.</p>
-                        <p style="font-size:0.9rem;color:#958db2;margin-top:8px;">Por favor, intenta de nuevo más tarde.</p>
+                        <p style="font-size:0.9rem;margin-top:8px;">Por favor, intenta de nuevo más tarde.</p>
                     </div>
                 `;
             }
@@ -1074,7 +1084,6 @@
         function renderizarRSVP(data, container) {
             const { codigo, invitados, telefonoExistente } = data;
 
-            // Estado local
             let asistencias = {};
             invitados.forEach((inv, idx) => {
                 asistencias[idx] = inv.asistencia || false;
@@ -1121,8 +1130,6 @@
 
             container.innerHTML = html;
 
-            // --- Event listeners ---
-            // Checkboxes
             document.querySelectorAll('.invitado-item input[type="checkbox"]').forEach(cb => {
                 cb.addEventListener('change', function() {
                     const idx = parseInt(this.dataset.index);
@@ -1130,13 +1137,11 @@
                 });
             });
 
-            // Teléfono
             const telefonoInput = document.getElementById('telefonoFamiliar');
             telefonoInput.addEventListener('input', function() {
                 window.estadoInvitados.telefono = this.value.trim();
             });
 
-            // Botón enviar
             document.getElementById('btnEnviarConfirmacion').addEventListener('click', function() {
                 enviarConfirmacion();
             });
@@ -1149,7 +1154,6 @@
             const estado = window.estadoInvitados;
             if (!estado) return;
 
-            // Construir datos para enviar
             const datos = {
                 codigo: estado.codigo,
                 telefono: estado.telefono || '',
@@ -1201,7 +1205,6 @@
 
         console.log('🎉 Boda de Yaneth & Miguel');
         console.log('📅 14 de noviembre de 2026');
-        console.log('🔗 App Script URL:', APP_SCRIPT_URL);
     </script>
 </body>
 </html>
